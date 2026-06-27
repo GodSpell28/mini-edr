@@ -1,6 +1,16 @@
 # Usage
 
-## Running the monitor
+## CLI
+
+Run the monitor from the command line:
+
+```bash
+mini-edr --watch . --interval 2.0 --alert-process cmd.exe powershell.exe
+```
+
+Output is written to `edr-events.jsonl` by default.
+
+## Python API
 
 ```python
 from mini_edr.monitor import EDRMonitor
@@ -8,7 +18,7 @@ from mini_edr.monitor import EDRMonitor
 def alert_handler(event):
     print("Alert:", event)
 
-monitor = EDRMonitor(poll_interval=2.0)
+monitor = EDRMonitor(poll_interval=2.0, watch_paths=["."])
 
 monitor.register_alert(
     name="suspicious_process",
@@ -19,6 +29,15 @@ monitor.register_alert(
 monitor.watch()
 ```
 
-## Extending rules
+## Configuration
 
-Rules are simple predicate/handler pairs. Build custom detection logic in `src/mini_edr/rules.py`.
+Save settings to `mini-edr.json`:
+
+```json
+{
+  "watch_paths": ["."],
+  "poll_interval": 2.0,
+  "alert_processes": ["cmd.exe"],
+  "output": "edr-events.jsonl"
+}
+```

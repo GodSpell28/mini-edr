@@ -4,11 +4,33 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mini-edr"
-version = "0.1.0"
+version = "0.1.1"
 description = "Lightweight endpoint monitoring concept in Python"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
+authors = [
+    {name = "GodSpell28", email = "bhaveshbhardwaj28@gmail.com"},
+]
+keywords = ["edr", "monitoring", "security", "endpoint"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "psutil>=5.9.0",
+    "watchdog>=3.0.0",
+]
+
+[project.scripts]
+mini-edr = "mini_edr.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

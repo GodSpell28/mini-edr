@@ -9,33 +9,61 @@ Tracks process creation, file changes, and network connections using standard OS
 - Process creation/deletion monitoring
 - File system change tracking
 - Network connection logging
-- Simple rule-based alerting
-- JSON-formatted event export
+- Rule-based alerting
+- JSON/JSONL event export
+- CLI with configurable watch paths and alerts
 
 ## Requirements
 
 - Python 3.8+
+- psutil
+- watchdog
 
 ## Installation
 
 ```bash
-git clone https://github.com/GodSpell28/mini-edr.git
-cd mini-edr
 pip install -e .
 ```
 
-## Quick Start
+## Usage
 
-```python
-from mini_edr.monitor import EDRMonitor
+```bash
+mini-edr --watch /tmp --interval 1.0 --alert-process cmd.exe powershell.exe
+```
 
-monitor = EDRMonitor()
-monitor.watch()
+## Configuration
+
+Default settings:
+
+```json
+{
+  "watch_paths": ["."],
+  "poll_interval": 2.0,
+  "alert_processes": [],
+  "output": "edr-events.jsonl"
+}
+```
+
+## Project Structure
+
+```
+mini-edr/
+├── src/mini_edr/
+│   ├── __init__.py
+│   ├── cli.py           # argparse CLI
+│   ├── config.py       # JSON config loader/saver
+│   ├── events.py       # event dataclasses and serialization
+│   ├── monitor.py      # process, filesystem, network sampling
+│   └── rules.py        # rule engine
+├── tests/
+│   └── test_monitor.py
+└── docs/
+    └── usage.md
 ```
 
 ## Limitations
 
-This is an educational implementation. It does not provide the tamper resistance, kernel-mode components, or real-time blocking of a production EDR.
+Educational implementation only. No kernel-mode components, no tamper resistance, and no real-time blocking.
 
 ## License
 
