@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini-edr"
+version = "0.1.0"
+description = "Lightweight endpoint monitoring concept in Python"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+
+[tool.setuptools.packages.find]
+where = ["src"]
